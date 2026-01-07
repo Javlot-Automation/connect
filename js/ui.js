@@ -16,6 +16,13 @@ export async function loadStepContent(stepNumber) {
         if (!response.ok) throw new Error(`Failed to load step${stepNumber}.html`);
         const html = await response.text();
         container.innerHTML = html;
+
+        // Add 'active' class to make the step content visible
+        const stepContent = container.querySelector('.step-content');
+        if (stepContent) {
+            stepContent.classList.add('active');
+        }
+
         applyTranslations();
         initStepListeners(stepNumber);
     } catch (error) {
